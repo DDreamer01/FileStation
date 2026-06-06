@@ -1,8 +1,13 @@
-<div align="center">
-  <img src="https://img.icons8.com/color/144/000000/folder-invoices--v1.png" alt="FileStation Logo">
-  <h1>FileStation</h1>
-  <p><b>A modern, lightning-fast, single-file Python web file manager.</b></p>
-</div>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=200&section=header&text=FileStation&fontSize=60&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Lightning-fast%20Python%20web%20file%20manager&descAlignY=55&descSize=18"/>
+</p>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:6C63FF,100:00D4FF&height=3"/>
+
+![Python](https://img.shields.io/badge/Python-3.7+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen?style=for-the-badge)
+![HTTPS](https://img.shields.io/badge/HTTPS-Let's%20Encrypt-003A70?style=for-the-badge&logo=letsencrypt&logoColor=white)
 
 FileStation is a production-ready, ultra-lightweight web server that turns any Linux directory into a beautiful, secure, and modern file management interface. With zero external dependencies (just standard Python 3), you can instantly deploy a premium file server anywhere.
 
@@ -21,7 +26,7 @@ FileStation is a production-ready, ultra-lightweight web server that turns any L
 ## 🚀 One-Click Installation (Debian/Ubuntu)
 
 The fastest way to deploy FileStation with systemd management and automatic Let's Encrypt SSL certificates is using the included installer script.
-# Download the files to your server and run
+## Download the files to your server and run
 
 ```bash
 wget https://raw.githubusercontent.com/DDreamer01/FileStation/main/server.py https://raw.githubusercontent.com/DDreamer01/FileStation/main/install.sh && chmod +x install.sh && sudo ./install.sh
