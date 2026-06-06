@@ -22,12 +22,12 @@ FileStation is a production-ready, ultra-lightweight web server that turns any L
 ## ✨ Key Features
 
  **🗂️ Single-File Architecture:** The entire backend, frontend HTML, CSS, and vanilla JS are packed into a single `server.py` file. Just drop it and run.
-- **📤 Resumable Chunked Uploads:** Upload massive files (5GB+ ISOs/videos). Internet blipped? Just drag the file back in and it resumes instantly from where it left off.
-- **📁 Folder Drag-and-Drop:** Drag entire nested folder trees directly from your desktop into the browser. FileStation recursively reads them and recreates the exact structure on your server.
-- **🎬 Rich Media Previews:** Natively streams videos and audio. Renders Markdown (`.md`) files beautifully, and provides syntax highlighting for code files (`.py`, `.js`, `.sh`, etc.) directly in the browser.
-- **🔐 Built-in HTTPS & Let's Encrypt:** Native integration for SSL. It automatically handles HTTPS redirects and serves your Let's Encrypt certificates directly.
-- **👁️ Public vs. Admin Modes:** Securely lock down your server with Basic Auth, or enable `--public` mode to let guests download and preview files while blocking all uploads and deletions. No annoying browser password prompts for guests!
-- **🌙 Premium Glassmorphic UI:** A meticulously designed dark-mode interface with smooth animations, mobile responsiveness, and bulk-action toolbars.
+ **📤 Resumable Chunked Uploads:** Upload massive files (5GB+ ISOs/videos). Internet blipped? Just drag the file back in and it resumes instantly from where it left off.
+ **📁 Folder Drag-and-Drop:** Drag entire nested folder trees directly from your desktop into the browser. FileStation recursively reads them and recreates the exact structure on your server.
+ **🎬 Rich Media Previews:** Natively streams videos and audio. Renders Markdown (`.md`) files beautifully, and provides syntax highlighting for code files (`.py`, `.js`, `.sh`, etc.) directly in the browser.
+ **🔐 Built-in HTTPS & Let's Encrypt:** Native integration for SSL. It automatically handles HTTPS redirects and serves your Let's Encrypt certificates directly.
+ **👁️ Public vs. Admin Modes:** Securely lock down your server with Basic Auth, or enable `--public` mode to let guests download and preview files while blocking all uploads and deletions. No annoying browser password prompts for guests!
+ **🌙 Premium Glassmorphic UI:** A meticulously designed dark-mode interface with smooth animations, mobile responsiveness, and bulk-action toolbars.
 
 ## 🚀 One-Click Installation (Debian/Ubuntu)
 
