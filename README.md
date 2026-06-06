@@ -1,5 +1,6 @@
-<img src="https://img.icons8.com/color/144/000000/folder-invoices--v1.png" alt="FileStation Logo">
 <p align="center">
+  <img src="https://img.icons8.com/color/144/000000/folder-invoices--v1.png" alt="FileStation Logo"/>
+  <br/>
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=200&section=header&text=FileStation&fontSize=60&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Lightning-fast%20Python%20web%20file%20manager&descAlignY=55&descSize=18"/>
 </p>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:6C63FF,100:00D4FF&height=3"/>
@@ -13,7 +14,7 @@
 FileStation is a production-ready, ultra-lightweight web server that turns any Linux directory into a beautiful, secure, and modern file management interface. With zero external dependencies (just standard Python 3), you can instantly deploy a premium file server anywhere.
 
 <p align="center">
-  <img src="https://imgur.com/fjWj2xX" alt="FileStation UI Preview" width="800"/>
+  <img src="https://imgur.com/fjWj2xX" alt="FileStation UI Preview" width="600"/>
 </p>
 
 ## ✨ Key Features
