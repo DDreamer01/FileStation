@@ -1,4 +1,5 @@
 <p align="center">
+  <img src="https://img.icons8.com/color/144/000000/folder-invoices--v1.png" alt="FileStation Logo">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=200&section=header&text=FileStation&fontSize=60&fontColor=ffffff&animation=twinkling&fontAlignY=35&desc=Lightning-fast%20Python%20web%20file%20manager&descAlignY=55&descSize=18"/>
 </p>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:6C63FF,100:00D4FF&height=3"/>
