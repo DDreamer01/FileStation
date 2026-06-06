@@ -6,7 +6,7 @@
 
 FileStation is a production-ready, ultra-lightweight web server that turns any Linux directory into a beautiful, secure, and modern file management interface. With zero external dependencies (just standard Python 3), you can instantly deploy a premium file server anywhere.
 
-![FileStation UI Preview](https://i.imgur.com/PLACEHOLDER_UI.png) <!-- Feel free to add a screenshot here! -->
+![FileStation UI Preview](https://imgur.com/a/NLGqn0d)
 
 ## ✨ Key Features
 
@@ -21,15 +21,10 @@ FileStation is a production-ready, ultra-lightweight web server that turns any L
 ## 🚀 One-Click Installation (Debian/Ubuntu)
 
 The fastest way to deploy FileStation with systemd management and automatic Let's Encrypt SSL certificates is using the included installer script.
+# Download the files to your server and run
 
 ```bash
-# Download the files to your server
-wget https://raw.githubusercontent.com/YOUR_USERNAME/FileStation/main/server.py
-wget https://raw.githubusercontent.com/YOUR_USERNAME/FileStation/main/install.sh
-
-# Make the installer executable and run it
-chmod +x install.sh
-sudo ./install.sh
+wget https://raw.githubusercontent.com/DDreamer01/FileStation/main/server.py https://raw.githubusercontent.com/DDreamer01/FileStation/main/install.sh && chmod +x install.sh && sudo ./install.sh
 ```
 
 The interactive installer will ask you:
