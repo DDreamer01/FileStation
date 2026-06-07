@@ -70,7 +70,7 @@ python3 server.py -d /home/user/files -u admin --password secret
 | `--public` | Allows unauthenticated users to view and download files (read-only). |
 | `--max-upload` | Max upload size in GB (default: `2.0`). |
 
-When in public mode, you can append `_login` to your domain/ip for a logging in.
+When in public mode, you can append `_login` to your domain/ip for logging in.
 
 ## 🔒 Security Notes
 
