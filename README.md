@@ -74,6 +74,8 @@ python3 server.py -d /home/user/files -u admin --password secret
 - **Path Traversal:** FileStation includes strict path resolution to prevent directory traversal attacks. Users cannot access files outside the specified root directory.
 - **TLS Handshake Timeouts:** The server includes a custom secure socket wrapper to prevent malicious port scanners from hanging the server threads indefinitely.
 
+**Developed by:** [†hε drεαmεr](https://t.me/DR34_M3R)
+
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/YOUR_USERNAME/FileStation/issues).
 
