@@ -48,7 +48,9 @@ The interactive installer will ask you:
 ## 🛠️ Manual Usage & CLI Options
 
 If you don't want to run it as a system service, you can run `server.py` directly. **Python 3.7+ is required.**
-
+```bash
+wget https://raw.githubusercontent.com/DDreamer01/FileStation/main/server.py
+```
 ```bash
 python3 server.py -d /home/user/files -u admin --password secret
 ```
