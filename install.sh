@@ -47,9 +47,14 @@ fi
 
 read -p "Enter your domain for HTTPS (leave blank for HTTP only): " FS_DOMAIN
 
+read -p "Enable HTTPS with a self-signed certificate? (y/n) [y]: " FS_SSLSELF
+FS_SSLSELF=${FS_SSLSELF:-y}
+
 echo -e "\n${GREEN}Updating system and installing dependencies...${NC}"
 apt update
-apt install -y python3 certbot
+apt install -y python3 certbot openssl
+# Optional: ffmpeg enables cached video thumbnails in the web UI. Ignore failures.
+apt install -y ffmpeg || true
 
 # Download server.py if not in current directory
 if [ ! -f "/root/server.py" ]; then
@@ -71,6 +76,16 @@ if [ -n "$FS_DOMAIN" ]; then
     certbot certonly --standalone -d "$FS_DOMAIN" --non-interactive --agree-tos --register-unsafely-without-email
     
     SSL_FLAGS="--force-https --cert /etc/letsencrypt/live/$FS_DOMAIN/fullchain.pem --key /etc/letsencrypt/live/$FS_DOMAIN/privkey.pem"
+elif [[ "$FS_SSLSELF" =~ ^[Yy]$ ]]; then
+    echo -e "\n${GREEN}Generating a self-signed certificate...${NC}"
+    mkdir -p /etc/filestation
+    if [ ! -f /etc/filestation/cert.pem ] || [ ! -f /etc/filestation/key.pem ]; then
+        openssl req -x509 -newkey rsa:2048 -keyout /etc/filestation/key.pem \
+            -out /etc/filestation/cert.pem -days 825 -nodes -subj "/CN=filestation" >/dev/null 2>&1
+    fi
+    chmod 644 /etc/filestation/cert.pem
+    chmod 600 /etc/filestation/key.pem
+    SSL_FLAGS="--cert /etc/filestation/cert.pem --key /etc/filestation/key.pem"
 fi
 
 echo -e "\n${GREEN}Setting up Systemd Service...${NC}"
@@ -98,6 +113,8 @@ echo -e "\n${BLUE}=======================================${NC}"
 echo -e "${GREEN}Installation Complete!${NC}"
 if [ -n "$FS_DOMAIN" ]; then
     echo -e "Access your server at: https://$FS_DOMAIN"
+elif [ -n "$SSL_FLAGS" ]; then
+    echo -e "Access your server at: https://$(hostname -I | awk '{print $1}'):$FS_HTTPS_PORT"
 else
     echo -e "Access your server at: http://$(hostname -I | awk '{print $1}'):$FS_PORT"
 fi
