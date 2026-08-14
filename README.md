@@ -17,6 +17,10 @@
 FileStation is a production-ready, ultra-lightweight web server that turns any Linux directory into a beautiful, secure, and modern file management interface. The entire backend, frontend HTML, CSS, and vanilla JS are packed into a single `server.py` file with **zero Python dependencies** (just standard Python 3.7+).
 
 <p align="center">
+  <b>Live Demo: <a href="https://fs.imagitech.online">https://fs.imagitech.online</a></b>
+</p>
+
+<p align="center">
   <img src="https://github.com/user-attachments/assets/9eca2dc6-0f52-4711-939e-04c1c85be41c" alt="FileStation UI Preview" width="600"/>
 </p>
 
