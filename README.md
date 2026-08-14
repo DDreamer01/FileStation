@@ -21,7 +21,7 @@ FileStation is a production-ready, ultra-lightweight web server that turns any L
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9eca2dc6-0f52-4711-939e-04c1c85be41c" alt="FileStation UI Preview" width="600"/>
+  <img src="https://github.com/user-attachments/assets/ba873286-a185-457d-a1d0-56ebc74337e3" alt="FileStation UI Preview" width="600"/>
 </p>
 
 ## ✨ Key Features
