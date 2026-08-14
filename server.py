@@ -645,6 +645,10 @@ input,textarea{font-family:inherit;font-size:inherit}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         <span class="btn-text">Download</span>
       </button>
+      <button class="btn btn-outline" id="btn-copy-sel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        <span class="btn-text">Copy Links</span>
+      </button>
       <button class="btn btn-outline" id="btn-move-sel">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><polyline points="5 9 2 12 5 15"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
         <span class="btn-text">Move</span>
@@ -787,7 +791,7 @@ input,textarea{font-family:inherit;font-size:inherit}
   <button class="nav-media-btn nav-media-prev" onclick="navigateMedia(-1)">&lt;</button>
   <button class="nav-media-btn nav-media-next" onclick="navigateMedia(1)">&gt;</button>
   <div class="modal modal-xl">
-    <div class="modal-header"><span class="modal-title" id="video-title">Video</span><button class="modal-close" onclick="closeVideo()">x</button></div>
+    <div class="modal-header"><span class="modal-title" id="video-title">Video</span><div style="display:flex;align-items:center;gap:8px;"><button class="btn btn-outline btn-sm" id="video-copy-link" style="padding:4px 10px;font-size:12px;display:flex;align-items:center;gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span>Copy Link</span></button><button class="modal-close" onclick="closeVideo()">x</button></div></div>
     <div class="video-modal-body">
       <div class="video-wrap"><video id="video-player" controls preload="metadata" playsinline>Your browser does not support HTML5 video.</video></div>
       <div class="video-info" id="video-info"></div>
@@ -800,7 +804,7 @@ input,textarea{font-family:inherit;font-size:inherit}
   <button class="nav-media-btn nav-media-prev" onclick="navigateMedia(-1)">&lt;</button>
   <button class="nav-media-btn nav-media-next" onclick="navigateMedia(1)">&gt;</button>
   <div class="modal modal-xl">
-    <div class="modal-header"><span class="modal-title" id="image-title">Image</span><button class="modal-close" onclick="closeModal('modal-image')">x</button></div>
+    <div class="modal-header"><span class="modal-title" id="image-title">Image</span><div style="display:flex;align-items:center;gap:8px;"><button class="btn btn-outline btn-sm" id="image-copy-link" style="padding:4px 10px;font-size:12px;display:flex;align-items:center;gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><span>Copy Link</span></button><button class="modal-close" onclick="closeModal('modal-image')">x</button></div></div>
     <div class="image-modal-body"><img id="image-viewer" src="" alt=""></div>
   </div>
 </div>
@@ -810,7 +814,7 @@ input,textarea{font-family:inherit;font-size:inherit}
   <div class="modal modal-xl">
     <div class="modal-header"><span class="modal-title" id="preview-title">Preview</span><button class="modal-close" onclick="closeModal('modal-preview')">x</button></div>
     <div class="preview-body" id="preview-body"></div>
-    <div class="modal-footer"><button class="btn btn-primary" id="preview-edit" style="display:none">Edit</button><button class="btn btn-outline" id="preview-download">Download</button><button class="btn btn-ghost" onclick="closeModal('modal-preview')">Close</button></div>
+    <div class="modal-footer"><button class="btn btn-primary" id="preview-edit" style="display:none">Edit</button><button class="btn btn-outline" id="preview-copy-link">Copy Link</button><button class="btn btn-outline" id="preview-download">Download</button><button class="btn btn-ghost" onclick="closeModal('modal-preview')">Close</button></div>
   </div>
 </div>
 
@@ -858,6 +862,27 @@ function joinPath(...parts){let p=parts.join("/").replace(/\/+/g,"/");if(!p.star
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
 function jesc(s){return JSON.stringify(String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 function encPath(p){return String(p).split("/").map(encodeURIComponent).join("/");}
+function copyLink(ev,fp){
+  if(ev)ev.stopPropagation();
+  let cleanFp=String(fp);if(!cleanFp.startsWith("/"))cleanFp="/"+cleanFp;
+  let fullUrl=location.origin+encPath(cleanFp);
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(fullUrl).then(()=>{notify("Link copied to clipboard","success");}).catch(()=>fallbackCopy(fullUrl));
+  }else{
+    fallbackCopy(fullUrl);
+  }
+}
+function fallbackCopy(text){
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=text;ta.style.position="fixed";ta.style.top="0";ta.style.left="0";ta.style.opacity="0";ta.style.pointerEvents="none";
+    document.body.appendChild(ta);ta.focus();ta.select();
+    const ok=document.execCommand("copy");
+    document.body.removeChild(ta);
+    if(ok){notify("Link copied to clipboard","success");}
+    else{prompt("Copy link:",text);}
+  }catch(e){prompt("Copy link:",text);}
+}
 function notify(msg,type="info",duration=3500){
   const c=document.getElementById("notif-container");const n=document.createElement("div");
   n.className=`notif ${type}`;const icon=type==="success"?"✓":type==="error"?"✕":"i";
@@ -963,8 +988,8 @@ function renderList(entries){
   const rows=entries.map(e=>{
     const fp=filePath(e);const sel=selected.has(fp);const isDir=e.type==="dir";
     const drag=IS_ADMIN?"draggable='true'":"";
-    const hasActions = IS_ADMIN || !isDir;
-    return`<tr class="file-row${sel?" selected":""}" data-path="${esc(fp)}" data-type="${e.type}" ${drag}><td><input type="checkbox" class="file-check" ${sel?"checked":""}  onclick="toggleSelect(event,${jesc(fp)})"></td><td><div class="file-name-cell"><span class="file-icon">${getIcon(e)}</span><span class="file-name" title="${esc(e.name)}">${esc(e.name)}</span></div></td><td class="file-size">${isDir?(e.children!==undefined?e.children+" items":"-"):humanSize(e.size)}</td><td class="file-date">${humanDate(e.modified)}</td><td><div class="file-actions"><div class="desktop-actions">${IS_ADMIN&&isText(e)?`<button class="file-action-btn" onclick="editFile(event,${jesc(fp)},${jesc(e.name)})">Edit</button>`:""}${IS_ADMIN?`<button class="file-action-btn" onclick="startRename(event,${jesc(fp)},${jesc(e.name)})">Rename</button>`:""}${IS_ADMIN?`<button class="file-action-btn" onclick="startMoveOne(event,${jesc(fp)})">Move</button>`:""}${!isDir?`<button class="file-action-btn" onclick="downloadFile(event,${jesc(fp)})">Download</button>`:""}${IS_ADMIN?`<button class="file-action-btn" style="color:var(--error)" onclick="confirmDelete(event,[${jesc(fp)}])">Delete</button>`:""}</div>${hasActions ? `<button class="file-action-btn mobile-more-btn" onclick="openBottomSheet(event,${jesc(fp)},${jesc(e.name)},${isDir},${isText(e)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>` : ""}</div></td></tr>`;
+    const hasActions = true;
+    return`<tr class="file-row${sel?" selected":""}" data-path="${esc(fp)}" data-type="${e.type}" ${drag}><td><input type="checkbox" class="file-check" ${sel?"checked":""}  onclick="toggleSelect(event,${jesc(fp)})"></td><td><div class="file-name-cell"><span class="file-icon">${getIcon(e)}</span><span class="file-name" title="${esc(e.name)}">${esc(e.name)}</span></div></td><td class="file-size">${isDir?(e.children!==undefined?e.children+" items":"-"):humanSize(e.size)}</td><td class="file-date">${humanDate(e.modified)}</td><td><div class="file-actions"><div class="desktop-actions">${IS_ADMIN&&isText(e)?`<button class="file-action-btn" onclick="editFile(event,${jesc(fp)},${jesc(e.name)})">Edit</button>`:""}${IS_ADMIN?`<button class="file-action-btn" onclick="startRename(event,${jesc(fp)},${jesc(e.name)})">Rename</button>`:""}${IS_ADMIN?`<button class="file-action-btn" onclick="startMoveOne(event,${jesc(fp)})">Move</button>`:""}<button class="file-action-btn" onclick="copyLink(event,${jesc(fp)})">Copy Link</button>${!isDir?`<button class="file-action-btn" onclick="downloadFile(event,${jesc(fp)})">Download</button>`:""}${IS_ADMIN?`<button class="file-action-btn" style="color:var(--error)" onclick="confirmDelete(event,[${jesc(fp)}])">Delete</button>`:""}</div>${hasActions ? `<button class="file-action-btn mobile-more-btn" onclick="openBottomSheet(event,${jesc(fp)},${jesc(e.name)},${isDir},${isText(e)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>` : ""}</div></td></tr>`;
   }).join("");
   return`<table class="file-table"><thead><tr><th><input type="checkbox" class="file-check" id="chk-all" onclick="toggleAll(event)"></th><th class="sortable" onclick="setSort('name')">Name ${sortKey==='name'?(sortAsc?'&uarr;':'&darr;'):''}</th><th class="sortable" onclick="setSort('size')">Size ${sortKey==='size'?(sortAsc?'&uarr;':'&darr;'):''}</th><th class="sortable file-date" onclick="setSort('modified')">Modified ${sortKey==='modified'?(sortAsc?'&uarr;':'&darr;'):''}</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
@@ -977,7 +1002,7 @@ function renderGrid(entries){
     else if(IMAGE_EXTS.has(x))thumb=`<div class="grid-card-thumb"><img loading="lazy" src="${encPath(fp)}?preview=1" alt="${esc(e.name)}" onerror="this.style.display='none'"></div>`;
     else if(VIDEO_EXTS.has(x))thumb=`<div class="grid-card-thumb" style="background:#000"><img loading="lazy" src="${encPath(fp)}?thumb=1" alt="${esc(e.name)}" onerror="videoThumbFallback(this)"><div class="video-badge" style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,0.7);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;color:#fff">&#9654;</div></div>`;
     else thumb=`<div class="grid-card-thumb"><span class="thumb-icon">${getIcon(e)}</span></div>`;
-    return`<div class="grid-card${sel?" selected":""}" data-path="${esc(fp)}" data-type="${e.type}" ${drag}><input type="checkbox" class="grid-card-check" ${sel?"checked":""} onclick="toggleSelect(event,${jesc(fp)})">${thumb}<div class="grid-card-info"><div class="grid-card-name" title="${esc(e.name)}">${esc(e.name)}</div><div class="grid-card-meta">${isDir?(e.children!==undefined?e.children+" items":"-"):humanSize(e.size)}</div></div>${IS_ADMIN || !isDir ? `<div class="grid-card-actions"><div class="desktop-actions">${!isDir?`<button class="grid-action-btn" title="Download" onclick="downloadFile(event,${jesc(fp)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>`:""}${IS_ADMIN&&isText(e)?`<button class="grid-action-btn" title="Edit" onclick="editFile(event,${jesc(fp)},${jesc(e.name)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>`:""}${IS_ADMIN?`<button class="grid-action-btn" title="Move" onclick="startMoveOne(event,${jesc(fp)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/></svg></button>`:""}${IS_ADMIN?`<button class="grid-action-btn" title="Rename" onclick="startRename(event,${jesc(fp)},${jesc(e.name)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>`:""}${IS_ADMIN?`<button class="grid-action-btn" title="Delete" style="color:#f87171" onclick="confirmDelete(event,[${jesc(fp)}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>`:""}</div><button class="grid-action-btn mobile-more-btn" onclick="openBottomSheet(event,${jesc(fp)},${jesc(e.name)},${isDir},${isText(e)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div>`:""}</div>`;
+    return`<div class="grid-card${sel?" selected":""}" data-path="${esc(fp)}" data-type="${e.type}" ${drag}><input type="checkbox" class="grid-card-check" ${sel?"checked":""} onclick="toggleSelect(event,${jesc(fp)})">${thumb}<div class="grid-card-info"><div class="grid-card-name" title="${esc(e.name)}">${esc(e.name)}</div><div class="grid-card-meta">${isDir?(e.children!==undefined?e.children+" items":"-"):humanSize(e.size)}</div></div><div class="grid-card-actions"><div class="desktop-actions"><button class="grid-action-btn" title="Copy Link" onclick="copyLink(event,${jesc(fp)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>${!isDir?`<button class="grid-action-btn" title="Download" onclick="downloadFile(event,${jesc(fp)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>`:""}${IS_ADMIN&&isText(e)?`<button class="grid-action-btn" title="Edit" onclick="editFile(event,${jesc(fp)},${jesc(e.name)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>`:""}${IS_ADMIN?`<button class="grid-action-btn" title="Move" onclick="startMoveOne(event,${jesc(fp)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="19 9 22 12 19 15"/><line x1="2" y1="12" x2="22" y2="12"/></svg></button>`:""}${IS_ADMIN?`<button class="grid-action-btn" title="Rename" onclick="startRename(event,${jesc(fp)},${jesc(e.name)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></button>`:""}${IS_ADMIN?`<button class="grid-action-btn" title="Delete" style="color:#f87171" onclick="confirmDelete(event,[${jesc(fp)}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>`:""}</div><button class="grid-action-btn mobile-more-btn" onclick="openBottomSheet(event,${jesc(fp)},${jesc(e.name)},${isDir},${isText(e)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div></div>`;
   }).join("");
   return`<div class="file-grid">${cards}</div>`;
 }
@@ -1137,6 +1162,8 @@ async function openPreview(fp,name){
   const body=document.getElementById("preview-body");
   document.getElementById("preview-title").textContent=name;
   document.getElementById("preview-download").onclick=()=>downloadFile(null,fp);
+  const copyBtn=document.getElementById("preview-copy-link");
+  if(copyBtn) copyBtn.onclick=()=>copyLink(null,fp);
   const editBtn=document.getElementById("preview-edit");
   if(editBtn){
     if(IS_ADMIN && isText({name:name})){
@@ -1176,6 +1203,8 @@ function openVideo(fp, e){
   player.src = encPath(fp) + '?preview=1';
   document.getElementById('video-title').textContent = name + getMediaCounterSuffix();
   document.getElementById('video-info').textContent = (e && e.size) ? humanSize(e.size) : '';
+  const copyBtn = document.getElementById("video-copy-link");
+  if(copyBtn) copyBtn.onclick = () => copyLink(null, fp);
   openModal('modal-video');
   player.load();
   player.play().catch(()=>{});
@@ -1190,6 +1219,8 @@ function openImage(fp, e){
   viewer.style.opacity = '0.5';
   viewer.onload = () => { viewer.style.opacity = '1'; };
   viewer.src = encPath(fp) + '?preview=1';
+  const copyBtn = document.getElementById("image-copy-link");
+  if(copyBtn) copyBtn.onclick = () => copyLink(null, fp);
   openModal('modal-image');
 }
 
@@ -1222,6 +1253,7 @@ function toggleAll(ev){ev.stopPropagation();if(ev.target.checked)currentEntries.
 function updateBulkActions(){const n=selected.size;const bulk=document.getElementById("bulk-actions");if(n>0){bulk.classList.add("active");document.getElementById("sel-count").textContent=n+" selected";}else bulk.classList.remove("active");}
 document.getElementById("btn-deselect").addEventListener("click",()=>{selected.clear();updateBulkActions();renderEntries(currentEntries);});
 document.getElementById("btn-download-sel").addEventListener("click",async()=>{const paths=[...selected];if(!paths.length)return;const d=await api("POST",API_BASE+"_api/zip",{paths});if(d.key){const a=document.createElement("a");a.href=`${API_BASE}_api/zip-dl?key=${d.key}`;a.download=d.filename||"download.zip";a.click();}else notify(d.error||"Failed","error");});
+document.getElementById("btn-copy-sel").addEventListener("click",()=>{const paths=[...selected];if(!paths.length)return;const urls=paths.map(p=>location.origin+encPath(p.startsWith("/")?p:"/"+p)).join("\n");if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(urls).then(()=>{notify(`Copied ${paths.length} link(s) to clipboard`,"success");}).catch(()=>fallbackCopy(urls));}else{fallbackCopy(urls);}});
 function confirmDelete(ev,paths){if(ev)ev.stopPropagation();pendingDeletePaths=paths;const n=paths.length;document.getElementById("delete-msg").textContent=`Delete ${n} item${n!==1?"s":""}? This cannot be undone.`;openModal("modal-delete");}
 document.getElementById("delete-confirm").addEventListener("click",async()=>{const d=await api("POST",API_BASE+"_api/delete",{paths:pendingDeletePaths});if(d.deleted)notify(`Deleted ${d.deleted.length} item(s)`,"success");if(d.errors&&d.errors.length)notify("Some items failed to delete","error");selected.clear();updateBulkActions();closeModal("modal-delete");loadDir(currentPath);});
 document.getElementById("btn-delete-sel").addEventListener("click",()=>{if(!selected.size)return;confirmDelete(null,[...selected]);});
@@ -1579,6 +1611,10 @@ function openBottomSheet(event, fp, name, isDir, isTextFile) {
       <span>Move</span>
     </button>`;
   }
+  html += `<button class="bottom-sheet-item" onclick="closeSheet('sheet-actions'); copyLink(null, ${jesc(fp)})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+    <span>Copy Link</span>
+  </button>`;
   if (!isDir) {
     html += `<button class="bottom-sheet-item" onclick="closeSheet('sheet-actions'); downloadFile(null, ${jesc(fp)})">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"></line></svg>
